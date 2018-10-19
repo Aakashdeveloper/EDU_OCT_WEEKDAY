@@ -9,12 +9,13 @@
                 Filter By:
             </div>
             <div class="col-md-4">
-                <input type="text" [(ngModel)]="inputData"/>
+                <input type="text" [(ngModel)]="inputData"
+                placeholder="search by name"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                    <h3>Filtered By:{{inputData}}</h3>
+                    <h3>Number of record found:{{ (products | filterProduct:inputData )?.length}}</h3>
             </div>
             
         </div>    
@@ -27,7 +28,7 @@
                             <button type="button"
                                     class="btn btn-success"
                                     (click)="toggleImage()">
-                                Show Image
+                                {{showImage?"Hide Image":"Show Image"}}
                             </button>
                         </th>
                         <th>Name</th>
@@ -38,16 +39,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let prod of products">
+                    <tr *ngFor="let prod of products | filterProduct:inputData">
                         <td>
                             <img [src]="prod.imageUrl"
-                            *ngIf="showImage"/>
+                            *ngIf="showImage" 
+                            [style.width.px]="imageWidth"/>
                         </td>
                         <td>{{prod.productName | myCase:'upper'}}</td>
                         <td>{{prod.productCode | myCase:'lower'}}</td>
                         <td>{{prod.price | discount:'5':'-' | currency: 'INR'}}</td>
                         <td>{{prod.releaseDate}}</td>
-                        <td>{{prod.starRating}}</td>
+                        <td><app-star></app-star></td>
                     </tr>
                 </tbody>
             </table>
