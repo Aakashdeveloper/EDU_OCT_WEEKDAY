@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +18,9 @@ import { ProductService } from './products/product.services';
     // all module
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpModule,
+        HttpClientModule
     ],
     // all components & pipe
     declarations: [
@@ -26,7 +30,8 @@ import { ProductService } from './products/product.services';
         MyUpperPipe,
         DiscountPipe,
         ProductFilter,
-        StarComponent
+        StarComponent,
+
     ],
 
     // only first component

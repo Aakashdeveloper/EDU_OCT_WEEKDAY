@@ -9,7 +9,7 @@ import { Component, OnChanges,
 
 export class StarComponent implements OnChanges {
 
-    @Input() rating: Number;
+    @Input() rating: number;
     @Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>();
     starWidth: Number;
 
