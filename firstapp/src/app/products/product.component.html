@@ -45,7 +45,12 @@
                             *ngIf="showImage" 
                             [style.width.px]="imageWidth"/>
                         </td>
-                        <td>{{prod.productName | myCase:'upper'}}</td>
+                        <td>
+                            <a [routerLink]="['/products', prod.productId]"
+                                [queryParams]="{name:prod.productName,desc:prod.description,img:prod.imageUrl}">
+                                {{prod.productName | myCase:'upper'}}
+                            </a>
+                        </td>
                         <td>{{prod.productCode | myCase:'lower'}}</td>
                         <td>{{prod.price | discount:'5':'-' | currency: 'INR'}}</td>
                         <td>{{prod.releaseDate}}</td>

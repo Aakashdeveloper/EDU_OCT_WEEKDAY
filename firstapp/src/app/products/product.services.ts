@@ -11,7 +11,7 @@ import { map} from 'rxjs/operators';
 export class ProductService {
 
     private _productUrl = 'https://ngproductsparam.herokuapp.com/api/getProductDetails';
-
+    private _musicUrl = 'https://ngmusicdb.herokuapp.com/api/getMusic';
     constructor(private _http: Http,
                 private _httpClient: HttpClient) {}
 
@@ -19,7 +19,11 @@ export class ProductService {
         return res.json();
     }
     getProducts(): Observable<IProduct[]> {
-        return this._httpClient.get<IProduct[]>(this._productUrl)
+        return this._httpClient.get<IProduct[]>(this._productUrl);
+    }
+
+    getMusic(): Observable<IProduct[]> {
+        return this._httpClient.get<IProduct[]>(this._musicUrl);
     }
 }
 

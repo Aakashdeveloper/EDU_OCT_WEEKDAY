@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -12,6 +13,9 @@ import { DiscountPipe } from './products/discountedPrice.pipe';
 import { ProductFilter } from './products/productFilter.pipe';
 import { StarComponent } from './shared/star.component';
 import { ProductService } from './products/product.services';
+import { OrderComponent } from './orders/order.component';
+import { NotFoundComponent } from './shared/notFound.component';
+import { ProductDetailComponent } from './products/product-detail.component';
 
 
 @NgModule({
@@ -20,7 +24,15 @@ import { ProductService } from './products/product.services';
         BrowserModule,
         FormsModule,
         HttpModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forRoot([
+            {path: 'products', component: ProductComponent},
+            {path: 'products/:id', component: ProductDetailComponent},
+            {path: 'orders', component: OrderComponent},
+            {path: 'home', component: HomeComponent},
+            {path: '', redirectTo: 'home', pathMatch: 'full'},
+            {path: '**', component: NotFoundComponent}
+        ])
     ],
     // all components & pipe
     declarations: [
@@ -31,7 +43,9 @@ import { ProductService } from './products/product.services';
         DiscountPipe,
         ProductFilter,
         StarComponent,
-
+        OrderComponent,
+        NotFoundComponent,
+        ProductDetailComponent
     ],
 
     // only first component
