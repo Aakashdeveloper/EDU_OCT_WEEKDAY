@@ -7,8 +7,15 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { ProductComponent } from './products/product.component';
+import { MyUpperPipe } from './products/myUpperCase.pipe';
+import { DiscountPipe } from './products/discountedPrice.pipe';
+import { ProductFilter } from './products/productFilter.pipe';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/product.services';
 import { OrderComponent } from './orders/order.component';
 import { NotFoundComponent } from './shared/notFound.component';
+import { ProductDetailComponent } from './products/product-detail.component';
 import { ProductModule } from './products/product.module';
 
 
@@ -20,6 +27,8 @@ import { ProductModule } from './products/product.module';
         HttpModule,
         HttpClientModule,
         RouterModule.forRoot([
+            {path: 'products', component: ProductComponent},
+            {path: 'products/:id', component: ProductDetailComponent},
             {path: 'orders', component: OrderComponent},
             {path: 'home', component: HomeComponent},
             {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -31,15 +40,25 @@ import { ProductModule } from './products/product.module';
     declarations: [
         AppComponent,
         HomeComponent,
+        ProductComponent,
+        MyUpperPipe,
+        DiscountPipe,
+        ProductFilter,
+        StarComponent,
         OrderComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        ProductDetailComponent
     ],
+
     // only first component
     bootstrap: [
         AppComponent
     ],
+
     // all services
-    providers: []
+    providers: [
+        ProductService
+    ]
 })
 
 export class AppModule {
