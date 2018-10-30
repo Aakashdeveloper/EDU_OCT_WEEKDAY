@@ -3,17 +3,25 @@
     Template Form
   </div>
   <div class="panel-body">
-    <form>
-      <div class="form-group">
-          <label for="firstName">FirstName</label>
+    <form #form="ngForm" novalidate (submit)="submitForm(form)">
+      <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched">
+          <label class="control-label" for="firstName">FirstName</label>
           <input 
             type="text" 
             class="form-control" 
             id="firstName"
             name="firstName"
+            required
             [ngModel]="model.firstName"
-            (ngModelChange)="firstToUpper($event)">
+            (ngModelChange)="firstToUpper($event)"
+            #firstname="ngModel">
+            <div class="alert alert-danger" *ngIf="firstname.invalid && firstname.touched">
+              Please enter first Name
+            </div>
       </div>
+      <h2>Classes</h2>
+      <!--h2>{{firstname.className}}</h2-->
+      <h2>{{firstname.invalid}}</h2>
       <div class="form-group">
           <label for="lastName">LastName</label>
           <input 
@@ -22,6 +30,34 @@
             name="lastName"
             id="lastName"
             [(ngModel)]="model.lastName">
+      </div>
+      <div class="form-group" [class.has-error]="email.invalid && email.touched">
+        <label class="control-label" for="email">Email</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          name="email"
+          id="email"
+          pattern="^([a-zA-Z0-9\-\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,5})$"
+          #email="ngModel"
+          [(ngModel)]="model.email">
+          <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+            Please enter valid email
+          </div>
+      </div>
+      <div class="form-group" [class.has-error]="password.invalid && password.touched">
+        <label class="control-label" for="password">password</label>
+        <input 
+          type="password" 
+          class="form-control" 
+          name="password"
+          id="password"
+          minlength="8"
+          #password="ngModel"
+          [(ngModel)]="model.password">
+          <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+            Min length should be 8
+          </div>
       </div>
       <div class="radio">
         <label>
@@ -49,19 +85,24 @@
                 FullTime
           </label>
         </div>
-        <div class="form-group">
-          <label for="codelang">Code Lang</label>
+        <div class="form-group" [class.has-error]="hasCodeLangError">
+          <label class="control-label" for="codelang">Code Lang</label>
           <select class="form-control"
                   name="codelang"
                   id="codelang"
-                  [(ngModel)]="model.codelang">
+                  [(ngModel)]="model.codelang"
+                  (blur)="validateCodeLang($event)">
+              <option value="default">Please Select Lang</option>
               <option *ngFor="let lang of languages">
                 {{lang}}
               </option>
               
           </select>
+          <div class="alert alert-danger" *ngIf="hasCodeLangError">
+           Please select valid option
+          </div>
         </div>
-      <button class="btn btn-success" type="button">Submit</button>
+      <button class="btn btn-success" type="submit">Submit</button>
     </form>
   </div>
 </div>

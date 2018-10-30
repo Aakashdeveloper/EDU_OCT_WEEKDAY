@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { NgForm } from '@angular/forms';
+import { FormPosterService} from '../services/formPoster.service';
+
 
 @Component({
   selector: 'app-forms',
@@ -9,7 +12,10 @@ import { Employee } from '../models/employee.model';
 export class FormsComponent implements OnInit {
 
   languages: any[] = ['AngularJs', 'ReactJs', 'NodeJS', 'GoLang'];
-  model = new Employee('John', '', '', true, '');
+  model = new Employee('John', 'Methew', 'a@a.com', '12345678', 'male', true, 'AngularJs');
+  hasCodeLangError: Boolean = false;
+
+  constructor(private _FormPosterService: FormPosterService) { }
 
   firstToUpper(value: string): void {
     if (value.length > 0) {
@@ -18,8 +24,20 @@ export class FormsComponent implements OnInit {
       this.model.firstName = value;
     }
   }
-  constructor() { }
 
+  submitForm(form: NgForm): void {
+    this._FormPosterService.postEmployee(form.value)
+        .subscribe((data) => console.log('success', data));
+    console.log(form.value);
+  }
+
+  validateCodeLang(event): void {
+    if (this.model.codelang === 'default') {
+      this.hasCodeLangError = true;
+    } else {
+      this.hasCodeLangError = false;
+    }
+  }
   ngOnInit() {
   }
 
@@ -35,5 +53,9 @@ export class FormsComponent implements OnInit {
                         </div>
                     </div>
                  </div>
+
+
+pristine   valid         untouched
+dirty      invalid        touched
 
 */
