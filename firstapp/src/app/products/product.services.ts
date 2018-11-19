@@ -21,14 +21,6 @@ export class ProductService {
     getProducts(): Observable<IProduct[]> {
         return this._httpClient.get<IProduct[]>(this._productUrl);
     }
-
-    getMusic(): Observable<IProduct[]> {
-        return this._httpClient.get<IProduct[]>(this._musicUrl);
-    }
-
-    getProductDetail(id): Observable<IProduct[]> {
-        return this._httpClient.get<IProduct[]>(`${this._productUrl}?productId=${id}`);
-    }
 }
 
 /*

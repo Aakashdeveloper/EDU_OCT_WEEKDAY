@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <div class="row">
+        <div class="panel panel-primary col-md-12">  
+            
+  
+            <div  class="col-md-12" align="left">  
+              <p></p>              
+              <input  type="text" *ngIf="showFilterTextBox" [(ngModel)]="filterText"/>       
+             </div> 
+             <div  align="left">                                
+                <p align="left" class="col-md-12">             
+                </p>
+            </div>   
+  
+              <div class="panel-body">  
+              <div class="panel-responsive">                 
+
+                 <div *ngFor="let movie of movies">
+
+                      
+
+                        <div *ngIf="selectedArtist">
+                                <div class="column" >
+                                        <img [src]="selectedArtist.imageUrl" style="width:500px;height:350px;"/>
+                                </div>
+                                <div class="column" >
+                                    <div >
+                                            <div style="background-color:white" *ngFor="let album of selectedAlbumList">
+                                                    
+                                                    <p><b>Album: </b> {{album.title  | titlecase}} </p>
+                                                    {{album.year}} | {{album.price | currency }}
+                                                         
+                                                         <hr>
+                                                     
+                                    </div>
+        
+                                </div>
+                                         
+                                </div> 
+
+                        </div>   
+                        <hr>    
+                        
+                        <div class="w3-container">
+                                <div style="background-color:white"  *ngFor="let artist of movie.artists ; let i = index" (click)="setClickedRow(i)" (click)="onSelect(artist)" [class.active]="i == selectedRow">
+                                     <ul class="w3-ul w3-card-4">
+                                             <li class="w3-bar">
+                                               <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                                              
+                                               <img [src]="artist.imageUrl"class="w3-bar-item w3-circle w3-hide-small" style="width:85px"/>
+                                               <div class="w3-bar-item">
+                                                 <span class="w3-large"><b>{{artist.name  | titlecase}}</b></span><br>
+                                                 <span> {{artist.bio  | titlecase}}</span>
+                                               </div>
+                                             </li>                     
+                   
+                                     </ul>                   
+                             </div>
+                         </div>
+                                     
+  
+                   
+                </div>
+              </div>    
+                     
+        </div>       
+  
+  </div>  
+  
+    

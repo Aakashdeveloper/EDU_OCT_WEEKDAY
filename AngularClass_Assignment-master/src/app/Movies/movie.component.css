@@ -1,0 +1,13 @@
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: auto; /* Should be removed. Only for demonstration */
+}
+
+.row{
+    margin-top: 8%;
+}
+
+
+

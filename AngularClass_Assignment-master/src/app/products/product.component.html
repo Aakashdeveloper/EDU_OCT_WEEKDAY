@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <div class="row col-md-12"> 
+      <div class="panel panel-primary">  
+          <div class="panel-heading" align="left">  
+           <b>  {{title}} <b>[ {{(products | filterProducts :filterText)?.length}} ]</b>  </b>
+          </div>  
+
+ 
+
+            <div class="panel-body">                  
+                <div class="panel-responsive">
+               <!--<button type="submit" class="btn btn-success" (click)="showFilter()">  
+                        Filter to click
+                    </button>  &nbsp;&nbsp;--> 
+                    &nbsp;&nbsp;    
+                    <input  type="text"  [(ngModel)]="filterText" placeholder="Search.."/>
+                    <p></p> 
+                    <div  align="left" *ngIf="filterText"  style ="overflow: auto"> 
+                        <p align="left" class="col-md-12" >  
+                            <b>Filtered by: </b> {{filterText}}             
+                        </p>      
+                            
+                    </div> 
+                    <div >                    
+                        <div class="column" >
+                            <div >
+                                    <div style="background-color:white"  *ngFor="let product of products | filterProducts :filterText;"  (click)="onSelect(product)">
+                                         <ul class="w3-ul w3-card-4">
+                                                 <li class="w3-bar">                                                                                          
+                                                   <img [src]="product.imageUrl"class="w3-bar-item w3-circle w3-hide-small" style="width:85px"/>
+                                                   <div class="w3-bar-item">
+                                                     <span class="w3-large"><b>{{product.productName  | titlecase}}</b></span><br>
+                                                     <span> {{product.productCode}}  </span>
+                                                     <span><app-star [rating]="product.starRating"
+                                                        (ratingClicked)="onDataRecieve($event)"></app-star></span>
+                                                   </div>
+                                                 </li>                     
+                       
+                                         </ul>                   
+                                    </div>
+                            </div>                               
+                        </div>
+                        <div class="column" > 
+                          <div *ngIf="selectedProduct">
+                            {{selectedProduct.productCode}} 
+                            <img [src]="selectedProduct.imageUrl" style="width:500px;height:350px;"/>
+                            <hr>
+                            
+                            <div style="background-color:white" > {{selectedProduct.releaseDate}} </div>  
+                            <hr>
+                            <div style="background-color:white" >   {{selectedProduct.price | currency: 'USD'}}  </div>  
+                            <hr>
+                            <div style="background-color:white" >    {{selectedProduct.description  | titlecase}} </div>                   
+                          </div>
+                        </div>                                
+                    </div>                       
+                    <div  align="left" *ngIf="showFilterTextBox && filterText"  style ="overflow: auto"> 
+                        <p align="left" class="col-md-12" >  
+                            <b>Filtered by: </b> {{filterText}}             
+                        </p>      
+                            
+                    </div> 
+                </div>
+          </div>  
+                   
+        </div>       
+
+  </div>  
+
+  

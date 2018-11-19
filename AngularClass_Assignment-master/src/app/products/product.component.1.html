@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <div class="row col-md-12"> 
+      <div class="panel panel-primary">  
+          <div class="panel-heading" align="left">  
+           <b>  {{title}} </b>
+          </div>  
+
+            <div class="panel-body">                                
+              <div class="panel-responsive">  
+
+                  <button type="submit" class="btn btn-success" (click)="showFilter()">  
+                      Filter to click
+                    </button>  &nbsp;&nbsp;
+                    <input  type="text" *ngIf="showFilterTextBox" [(ngModel)]="filterText"/>  
+                    <p></p> 
+                <table class="table table-bordered">
+                    <thead align="center">
+                      <tr>
+                        <th>Image</th>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Product Code</th>
+                        <th>Release Date</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Star Rating</th>
+                      </tr>
+                    </thead>
+                    <tbody align="left">
+                      <tr *ngFor="let product of products | filterProducts :filterText"> 
+                        <td> <img [src]="product.imageUrl" style="width:25px;height:25px;"/></td>
+                        <td>{{product.productId}}</td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productCode}}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.price | currency: 'USD'}}</td>
+                        <td>{{product.starRating}}</td>                        
+                      </tr>                      
+                    </tbody>
+                </table> 
+                  <div  align="left" *ngIf="showFilterTextBox && filterText"  style ="overflow: auto"> 
+                      <p align="left" class="col-md-12" >  
+                          <b>Filtered by: </b> {{filterText}}             
+                      </p>      
+                          
+                  </div> 
+              </div>
+            </div>    
+                   
+        </div>       
+
+  </div>  
+
+  
