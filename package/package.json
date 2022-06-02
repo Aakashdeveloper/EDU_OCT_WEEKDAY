@@ -13,7 +13,7 @@
   "author": "Edureka",
   "license": "ISC",
   "dependencies": {
-    "@angular/core": "^6.1.10",
+    "@angular/core": "^11.0.5",
     "@angular/forms": "^6.1.10"
   }
 }
